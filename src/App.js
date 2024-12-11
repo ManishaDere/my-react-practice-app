@@ -1,23 +1,40 @@
-import logo from './logo.svg';
+import AccordionExample from './AccordionExample';
+import SearchBarExample from './SearchBarExample';
+import { ThemeContext } from "./ThemeContext";
+import Toolbar from "./Toolbar";
+import TestExample from "./TestExample";
+import Timer from "./Timer";
+import Counter from "./Counter";
 import './App.css';
+import LazyLoading from './LazyLoading';
+import DefferedDemo from "./DeferredDemo";
+import { Profiler } from 'react';
+import CounterExample from "./CounterExample";
+import WindowSizeUtilization from "./WindowSizeUtilization"
 
 function App() {
+  function onRender(id, phase, actualDuration, baseDuration, startTime, commitTime) {
+    // Aggregate or log render timings...
+    console.log({
+      id, phase, actualDuration, baseDuration, startTime, commitTime
+    })
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <AccordionExample />
+      <SearchBarExample />
+      <ThemeContext.Provider value="dark">
+        <Toolbar />
+      </ThemeContext.Provider>
+      <TestExample />
+      <Timer />
+      <Counter />
+      <LazyLoading />
+      <Profiler onRender={onRender}>
+        <DefferedDemo />
+      </Profiler>
+      {/* <CounterExample /> */}
+      <WindowSizeUtilization />
     </div>
   );
 }
